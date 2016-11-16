@@ -16,88 +16,58 @@ public class FourWin {
         }
         return res;
     }
-	
-	public Result verticalLinksUnten(){
-		return WIN;
-	}
-	
-	public Result horizontalLinkUnten(){
-	   return WIN;
-	}
- 
+
+    public Result verticalLinksUnten() {
+        return WIN;
+    }
+
+    public Result horizontalLinkUnten() {
+        return WIN;
+    }
+
     public Result throwChip(Chip chip, int column) {
 
-        int row = 0;
+        int row = 5;
         while (field[row][column] != null)
-            row++;
+            row--;
         field[row][column] = chip;
-        
-      for(int col = 0; col < 6; col++){
-        for (row = 0; row < 5; row++) {
-            if (field[0][0] == field[1][0]
-                     && field[0][0] == field[2][0] 
-                     && field[0][0] == field[3][0]){
-               return WIN;   
-            }else if(field[1][0] != null
-                  && field[1][0] == field[2][0] 
-                  && field[1][0] == field[3][0] 
-                  && field[1][0] == field[4][0]) {
-                return WIN;
-            }else if(field[1][0] != null
-                     && field[1][0] == field[2][0] 
-                     && field[1][0] == field[3][0] 
-                     && field[1][0] == field[4][0]){
-                     return WIN;
-            }else if (field[2][0] != null
-                     && field[2][0] == field[3][0] 
-                     && field[2][0] == field[4][0] 
-                     && field[2][0] == field[5][0]){
-                return WIN;
-                
-            }else if (field[0][0] == field[0][1]      // Ab hier wird über die Spalte iteriert 
-                     && field[0][0] == field[0][2] 
-                     && field[0][0] == field[0][3]){
-                return WIN;
-            }else if(field[0][1] != null
-                     && field[0][1] == field[0][2] 
-                     && field[0][1] == field[0][3] 
-                     && field[0][1] == field[0][4]){
-                return WIN;
-            }else if(field[0][2] != null
-                     && field[0][2] == field[0][3] 
-                     && field[0][2] == field[0][4] 
-                     && field[0][2] == field[0][5]){
-                return WIN;
-            }else if(field[0][3] != null
-                     && field[0][3] == field[0][4] 
-                     && field[0][3] == field[0][5] 
-                     && field[0][3] == field[0][6]){
-                return WIN;
-            }else if(field[3][0] != null       // Ab hier wird über das Diagonal geprüft
-                     && field[3][0] == field[2][1] 
-                     && field[3][0] == field[1][2] 
-                     && field[3][0] == field[0][3]){
-                return WIN; 
-            }else if(field[4][0] != null       
-                     && field[4][0] == field[3][1] 
-                     && field[4][0] == field[2][2] 
-                     && field[4][0] == field[1][3]){
-                return WIN;
-            }else if(field[5][0] != null       
-                     && field[5][0] == field[4][1] 
-                     && field[5][0] == field[3][2] 
-                     && field[5][0] == field[2][4]){
-                return WIN;
+
+        // vertical
+        for (int col = 0; col < 7; col++) {
+            for (int vertical = 5; vertical > 2; vertical--) {
+                if (field[vertical][col] != null
+                        && field[vertical][col] == field[vertical-1][col]
+                        && field[vertical][col] == field[vertical-2][col]
+                        && field[vertical][col] == field[vertical-3][col])
+                    return Result.WIN;
             }
-//                  {
-//                return WIN;
-//            }
-            return UNDECIDED;
         }
-      }
-        return UNDECIDED;
+
+        // Horizontal
+        for (int col = 0; col < 4; col++) {
+            for (int horizontal = 5; horizontal > 0; horizontal--) {
+                if (field[horizontal][col] != null
+                        && field[horizontal][col] == field[horizontal][col+1]
+                        && field[horizontal][col] == field[horizontal][col+2]
+                        && field[horizontal][col] == field[horizontal][col+3])
+                    return Result.WIN;
+            }
+        }
+        
+        // Diagonal
+        for (int col = 0; col < 4; col++) {
+            for (int diagonal=5; diagonal>2; diagonal--) {
+                if (field[diagonal][col] != null
+                        && field[diagonal][col] == field[diagonal-1][col+1]
+                        && field[diagonal][col] == field[diagonal-2][col+2]
+                        && field[diagonal][col] == field[diagonal-3][col+3])
+                    return Result.WIN;
+            }
+        }
+        {
+            return Result.UNDECIDED;
+        }
     }
-}
-      
+}    
 
 	
