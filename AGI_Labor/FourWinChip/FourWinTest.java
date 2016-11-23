@@ -4,11 +4,12 @@ import static FourWinChip.Chip.*;
 import static FourWinChip.Result.*;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FourWinTest {
 	
-	FourWin logic = new FourWin();
+	Spielfeld logic = new Spielfeld(6, 7, 4);
  
 	@Test
 	public void verticaLinkUnten()throws Exception {
@@ -113,5 +114,46 @@ public class FourWinTest {
                 
                 assertEquals(UNDECIDED, logic.throwChip(YELLOW, 6));
                 assertEquals(UNDECIDED, logic.throwChip(BLUE, 6));
+        }
+	
+	// Test für das TicTacToe	
+	Spielfeld logicTicTacToe = new Spielfeld(3, 3, 3);
+	
+	@Test
+        public void TicTacToeVerticalLinksUnten()throws Exception {
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 0));
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 0));
+                assertEquals(WIN, logicTicTacToe.throwChip(BLUE, 0));
+        }
+	
+	@Test
+        public void TicTacToeHorizontalLinksUnten()throws Exception {
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 0));
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 1));
+                assertEquals(WIN, logicTicTacToe.throwChip(BLUE, 2));
+        }
+	
+	@Ignore
+        public void TicTacToeDiagonalLinksUnten()throws Exception {
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 0));
+                
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(YELLOW, 1));
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 1));
+                
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(YELLOW, 2));
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(YELLOW, 2));
+                assertEquals(WIN, logicTicTacToe.throwChip(BLUE, 2));
+        }
+	
+	@Ignore
+        public void TicTacToeDiagonalRechtOben()throws Exception {
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 2));
+                
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(YELLOW, 1));
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(BLUE, 1));
+                
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(YELLOW, 0));
+                assertEquals(UNDECIDED, logicTicTacToe.throwChip(YELLOW, 0));
+                assertEquals(WIN, logicTicTacToe.throwChip(BLUE, 0));
         }
 }
